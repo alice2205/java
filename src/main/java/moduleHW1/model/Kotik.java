@@ -14,58 +14,70 @@ public class Kotik {
         this.weight = weight;
         this.meow = meow;
         this.prettiness = prettiness;
-        kotikCount++;
     }
 
     public Kotik() {
-        this.satiety = 4;
-        this.name = "Леопольд";
-        this.weight = 4;
-        this.meow = "Мяу";
-        this.prettiness = 100;
+    }
+
+    public void setKotik(int satiety, String name, int weight, String meow, int prettiness) {
+        this.satiety = satiety;
+        this.name = name;
+        this.weight = weight;
+        this.meow = meow;
+        this.prettiness = prettiness;
+    }
+
+    {
         kotikCount++;
     }
 
     public int getSatiety() {
         return satiety;
     }
+
     public String getName() {
         return name;
     }
+
     public int getWeight() {
         return weight;
     }
+
     public String getMeow() {
         return meow;
     }
+
     public int getPrettiness() {
         return prettiness;
     }
+
     public static int getKotikCount() {
         return kotikCount;
     }
 
-
     public void liveAnotherDay() {
-        System.out.println("Меня зовут " + name + " и мой вес всего лишь " + weight + " кг");
         for(int i = 0; i<24; i++) {
             int randomBehavior = (int) (Math.random() * 5) + 1;
+            boolean isFull = true;
             switch (randomBehavior) {
                 case 1:
-                    play();
+                    isFull = play();
                     break;
                 case 2:
-                    sleep();
+                    isFull = sleep();
                     break;
                 case 3:
-                    eat();
+                    isFull = wash();
                     break;
                 case 4:
-                    tygydykat();
+                    isFull = tygydykat();
                     break;
                 case 5:
-                    chaseMouse();
+                    isFull = chaseMouse();
                     break;
+            }
+            if (!isFull && satiety <=0) {
+               eat();
             }
         }
     }
@@ -73,18 +85,18 @@ public class Kotik {
     public void eat() {
         eat(3, " рыбу");
     };
+
     public void eat(int satietyUnits) {
         satiety += satietyUnits;
     }
+
     public void eat(int satietyUnits, String food) {
-        System.out.println("Я поел" + food );
         satiety += satietyUnits;
     }
 
     public boolean sleep() {
         if(satiety <=0) {
             System.out.println(meow + ", я голоден, покорми меня");
-            eat();
             return false;
         } else {
             System.out.println("Спал");
@@ -96,7 +108,6 @@ public class Kotik {
     public boolean play() {
         if(satiety <=0) {
             System.out.println(meow + ", я голоден, покорми меня");
-            eat();
             return false;
         } else {
             System.out.println("Играл");
@@ -105,10 +116,20 @@ public class Kotik {
         }
     }
 
+    public boolean wash() {
+        if(satiety <=0) {
+            System.out.println(meow + ", я голоден, покорми меня");
+            return false;
+        } else {
+            System.out.println("Умывался");
+            satiety--;
+            return true;
+        }
+    }
+
     public boolean tygydykat() {
         if(satiety <=0) {
             System.out.println(meow + ", я голоден, покорми меня");
-            eat();
             return false;
         } else {
             System.out.println("Тыгыдыкал");
@@ -120,7 +141,6 @@ public class Kotik {
     public boolean chaseMouse() {
         if(satiety <=0) {
             System.out.println(meow + ", я голоден, покорми меня");
-            eat();
             return false;
         } else {
             System.out.println("Ловил мышь");
