@@ -82,16 +82,17 @@ public class Kotik {
         }
     }
 
-    public void eat() {
-        eat(3, " рыбу");
-    };
-
     public void eat(int satietyUnits) {
         satiety += satietyUnits;
     }
 
+    public void eat() {
+        eat(3);
+    }
+
     public void eat(int satietyUnits, String food) {
-        satiety += satietyUnits;
+        System.out.println(food);
+        eat(satietyUnits);
     }
 
     public boolean sleep() {
